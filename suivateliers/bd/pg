@@ -1,0 +1,2 @@
+psql -h localhost -U sanayabio -d sbateliers -f sb1.sql
+pgloader mysql://sanayabio:sb2021@localhost/sb postgresql://sanayabio:azerty@localhost/sbateliers
