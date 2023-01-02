@@ -1,7 +1,7 @@
 <?php
 class secureToke
 {
-    private static $secretKey = 'Your Desired key(Hash)';
+    private static $secretKey = 'abc';
     private static $secretIv = 'www.domain.com';
     private static $encryptMethod = "AES-256-CBC";
     public static function tokenencrypt($data)

@@ -8,6 +8,7 @@
 			self::$connexion = new PDO( 'mysql:host=localhost;dbname=sb', 'slam', 'azerty' ) ;
 		}
 
+
 		private static function getConnexion(){
 			if( self::$connexion == null ){
 				new ModeleSuivAteliers() ;
@@ -17,12 +18,14 @@
 
 		public static function getResponsable( $login , $mdp ){
 			$bd = self::getConnexion() ;
-			$sql = "select numero , nom , prenom from responsable where login = :login and mdp = :mdp" ;
+			$sql = "select numero , AES_DECRYPT(nom, 'abc') as 'nom' , AES_DECRYPT(prenom, 'abc') as 'prenom' from responsable where login = :login and mdp = :mdp" ;
 			$st = $bd->prepare( $sql ) ;
 			$st->execute( array( ':login' => $login , ':mdp' => $mdp ) ) ;
 			$responsable = $st->fetch( PDO::FETCH_ASSOC ) ;
 			$st->closeCursor() ;
 			return $responsable ;
+
+			//if(empty($client)){ $st->closeCursor() ; return $client ; } return false;
 		}
 		
 		public static function getAtelier( $idAtelier ){

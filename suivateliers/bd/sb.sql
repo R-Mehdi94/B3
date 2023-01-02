@@ -18,6 +18,9 @@
 --
 -- Table structure for table `atelier`
 --
+SET @conc1 = "abc";
+SET @conc2 = "efg";
+
 
 DROP TABLE IF EXISTS `atelier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -56,16 +59,16 @@ DROP TABLE IF EXISTS `client`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `client` (
   `numero` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(30) NOT NULL,
-  `prenom` varchar(30) DEFAULT NULL,
-  `mdp` varchar(30) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `date_naissance` date DEFAULT NULL,
-  `adresse` varchar(100) DEFAULT NULL,
-  `cp` char(5) DEFAULT NULL,
-  `ville` varchar(30) DEFAULT NULL,
-  `mobile` char(10) DEFAULT NULL,
-  `civilite` varchar(4) NOT NULL,
+  `nom` varbinary(256) NOT NULL,
+  `prenom` varbinary(256) DEFAULT NULL,
+  `mdp` varchar(64) NOT NULL,
+  `email` varbinary(256) NOT NULL,
+  `date_naissance` varbinary(256) DEFAULT NULL,
+  `adresse` varbinary(256) DEFAULT NULL,
+  `cp` varbinary(256) DEFAULT NULL,
+  `ville` varbinary(256) DEFAULT NULL,
+  `mobile` varbinary(256) DEFAULT NULL,
+  `civilite` varbinary(256) NOT NULL,
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -76,7 +79,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'ONESTAS','Valentine','azerty','valentine.onestas@gmail.com','1995-11-08','15, rue de la gare','94130','Nogent s/Marne','0693530293','Mlle'),(3,'HAFIDI','Nadiya','azerty','n.hafidi@gmail.com','2000-04-01','11, bd de Strasbourg','94120','Fontenay s/bois','0711930388','Mme'),(4,'OSARO','Clémence','azerty','c.osaro@orange.fr','2001-09-15','25, place de la mairie','77350','Le Mée s/Seine','0683340299','Mme'),(5,'JADOUX','Lucie','azerty','lucie.jadoux@gmail.com','1997-11-03','2, bd de La République','94130','Nogent s/Marne','0703740203','Mlle'),(6,'KANNY','Pauline','azerty','p.kanny@gmail.com','1999-01-11','1 ter, rue Paul Doumer','95000','Cergy','0730832731','Mme'),(8,'KARA','Juliette','azerty','juliette.kara@gmail.com','2007-05-10','21, rue de la gare','94200','Ivry s/Seine','0799720154','Mlle'),(9,'LAURY','Sophie','azerty','sophie.laury@gmail.com','2002-08-02','15, rue du parc','94400','Vitry s/Seine','0638304393','Mlle');
+INSERT INTO `client` VALUES (1,aes_encrypt('ONESTAS','abc'),aes_encrypt('Valentine','abc'),SHA2('abcazertydef', 256),aes_encrypt('valentine.onestas@gmail.com','abc'),aes_encrypt('1995-11-08','abc'),aes_encrypt('15, rue de la gare','abc'),aes_encrypt('94130','abc'),aes_encrypt('Nogent s/Marne','abc'),aes_encrypt('0693530293','abc'),aes_encrypt('Mlle','abc')),(3,'HAFIDI','Nadiya',SHA2('abcazertydef', 256),'n.hafidi@gmail.com','2000-04-01','11, bd de Strasbourg','94120','Fontenay s/bois','0711930388','Mme'),(4,'OSARO','Clémence',SHA2('abcazertydef', 256),'c.osaro@orange.fr','2001-09-15','25, place de la mairie','77350','Le Mée s/Seine','0683340299','Mme'),(5,'JADOUX','Lucie',SHA2('abcazertydef', 256),'lucie.jadoux@gmail.com','1997-11-03','2, bd de La République','94130','Nogent s/Marne','0703740203','Mlle'),(6,'KANNY','Pauline',SHA2('abcazertydef', 256),'p.kanny@gmail.com','1999-01-11','1 ter, rue Paul Doumer','95000','Cergy','0730832731','Mme'),(8,'KARA','Juliette',SHA2('abcazertydef', 256),'juliette.kara@gmail.com','2007-05-10','21, rue de la gare','94200','Ivry s/Seine','0799720154','Mlle'),(9,'LAURY','Sophie',SHA2('abcazertydef', 256),'sophie.laury@gmail.com','2002-08-02','15, rue du parc','94400','Vitry s/Seine','0638304393','Mlle');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,9 +120,9 @@ DROP TABLE IF EXISTS `responsable`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `responsable` (
   `numero` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varbinary(200) NOT NULL,
-  `prenom` varbinary(200) NOT NULL,
-  `mdp` varchar(256) NOT NULL,
+  `nom` varbinary(256) NOT NULL,
+  `prenom` varbinary(256) NOT NULL,
+  `mdp` varchar(64) NOT NULL,
   `login` varchar(30) NOT NULL,
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
@@ -131,7 +134,7 @@ CREATE TABLE `responsable` (
 
 LOCK TABLES `responsable` WRITE;
 /*!40000 ALTER TABLE `responsable` DISABLE KEYS */;
-INSERT INTO `responsable` VALUES (1, aes_encrypt('DA SILVA', 'abc'),aes_encrypt('Maria','abc'),SHA2(CONCAT('azerty'),'256'),'mdasilva'),(2,aes_encrypt('JONES','abc'),aes_encrypt('Katarina','abc'),SHA2('azerty','256'),'kjones');
+INSERT INTO `responsable` VALUES (1, aes_encrypt('DA SILVA', 'abc'),aes_encrypt('Maria','abc'),SHA2('abcazertydef', 256),'mdasilva'),(2,aes_encrypt('JONES','abc'),aes_encrypt('Katarina','abc'),SHA2('abcazertydef', 256),'kjones');
 /*!40000 ALTER TABLE `responsable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -145,3 +148,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-11-25 14:20:53
+/*SHA2(CONCAT(SHA2('abcazertydef', 256)),'256')*/

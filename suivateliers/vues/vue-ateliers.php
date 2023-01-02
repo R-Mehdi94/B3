@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php include_once 'secureToke.php' ?>
+
+<?php require_once 'secureToke.php'; 
+
+
+?>
 
 	<head>
 		<meta charset="utf-8">
@@ -8,14 +12,10 @@
 	</head>
 	
 	<body>
-
 		<a href="/suivateliers/deconnecter">Se déconnecter</a>
-		
-		<br/>
-		<br/>
 
+		<h5><?= $_SESSION[ "nom" ] ?> <?= $_SESSION[ "prenom" ] ?></h5>
 
-		<?php  echo "Bienvenue" . openssl_decrypt($_SESSION['nom'], "AES-256-CBC" ,"abc")  ?>
 
 		
 		<h4>Ateliers</h4>
